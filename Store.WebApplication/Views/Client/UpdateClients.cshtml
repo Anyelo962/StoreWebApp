@@ -1,0 +1,18 @@
+﻿
+<form id="form" class="form-group" >
+    <label>Nombre</label>
+    <input type="text" class="form-control col-md-3" value="@ViewBag.name" name="name" id="name_id" placeholder="Nombre del cliente ejemp: Pablo" required />
+    <label>Apellido</label>
+    <input type="text" class="form-control col-md-3" value="@ViewBag.lastName" id="last_name_id" placeholder="Apellido del cliente ejemp: Martinez" required />
+    <label>Numero telefónico</label>
+    <input type="tel" class="form-control col-md-3" value="@ViewBag.telephone" id="number_id" placeholder="Numero telefónico" />
+    <br />
+    <input type="button" class="btn btn-success" data-url="@Url.Action("UpdateClient", "Client")" id="update_client" value="Actualizar" />
+</form>
+
+
+
+
+@section scripts{
+    <script src="~/js/client/client.js"></script>
+}

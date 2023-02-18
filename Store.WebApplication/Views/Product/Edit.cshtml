@@ -1,0 +1,18 @@
+﻿
+
+
+
+
+<form class="form-group">
+    <label>Nombre del producto</label>
+    <input type="text" class="form-control col-md-3" placeholder="Ejem: Tornillos" id="name_product_id" value="@ViewBag.name" />
+    <label>Descripción del producto</label>
+    <textarea type="text" class="form-control col-md-3" placeholder="Ejem: Tornillos para camas" id="desc_product_id">@ViewBag.description</textarea>
+
+    <input type="button" value="Agregar producto" class="btn btn-success" id="update_product" />
+
+</form>
+
+@section scripts{
+    <script src="~/js/product/product.js"></script>
+}

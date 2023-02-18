@@ -1,0 +1,50 @@
+﻿@model Store.WebApplication.ViewModels.ClientViewModel
+
+@{
+    ViewData["Title"] = "Client page";
+}
+
+<button type="button" class="btn btn-primary" id="add_client">
+    Agregar cliente
+</button>
+
+<br/>
+<br/>
+<div class="table">
+    <table class="table" id="table">
+        <thead class="table-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Telefono</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.clientList)
+            {
+                <tr>
+                        <td>@item.Name</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Telephone</td>
+                    <td>
+                  <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      </button>
+                      <div class="dropdown-menu">
+                                <button id="update_client_id" class="dropdown-item" data-url="@Url.Action("UpdateClients","Client", new {Id = item.Id})">Editar</button>
+                                <button id="remove_client_id" class="dropdown-item" data-url="@Url.Action("RemoveClient", "Client", new {id = item.Id})">Eliminar</button>
+                      </div>
+                    </div>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>
+
+
+@section scripts{
+    <script src="~/js/client/client.js"></script>
+}

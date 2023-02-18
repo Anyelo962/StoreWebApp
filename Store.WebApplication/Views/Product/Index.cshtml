@@ -1,0 +1,58 @@
+﻿@model Store.WebApplication.ViewModels.ProductViewModel
+
+
+<input type="button" class="btn btn-primary" data-url="@Url.Action("Create", "Product")" id="add_product_id" value="Agregar producto"/>
+<br/>
+<br/>
+<table class="table" id="product_id">
+
+  <thead class="table-dark">
+        <tr>
+            <th>Nombre producto</th>
+            <th>Descripción</th>
+            <th>Opciones</th>
+        </tr>
+  </thead>
+  <tbody>
+      @foreach (var item in Model.ProductList)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Description
+                </td>
+
+                <td>
+                    <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      </button>
+                      <div class="dropdown-menu">
+                            <button id="update_product_id" class="dropdown-item" data-url="@Url.Action("Edit", "Product", new {id = item.Id})">Editar</button>
+                                <button id="remove_product_id" class="dropdown-item" data-url=""@Url.Action("Delete", "Product", new {id = item.Id})>Eliminar</button>
+                      </div>
+                    </div>
+                </td>
+
+            </tr>
+        }
+  </tbody>
+</table>
+
+
+@section scripts{
+    <script src="~/js/product/product.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+

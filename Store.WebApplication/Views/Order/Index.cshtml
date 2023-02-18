@@ -1,0 +1,80 @@
+﻿@model Store.WebApplication.ViewModels.OrderViewModel
+<button type="button" class="btn btn-primary" data-toggle="modal" data-url="@Url.Action("_AddOrder", "Order")" id="get_modal" data-target="#modal_id">
+    Agregar orden
+</button>
+<br/>
+<br/>
+<table class="table" id="order_list">
+    <thead class="table-dark">
+        <tr>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Orders.GroupBy(x => new { x.IdProduct, x.IdClient }).Select(x => new {x.Key.IdClient, x.Key.IdProduct}))
+        {
+            <tr>
+                <td>@item.IdClient</td>
+                <td>
+                    @foreach (var product in Model.Products.Where(x => x.Id == item.IdProduct).GroupBy(x => new { x.Name }).Select(x => x.Key.Name))
+                    {
+                        @product;
+                    }
+                </td>
+                <td>
+                    <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      </button>
+                      <div class="dropdown-menu">
+                                <button id="" class="dropdown-item" data-url="">Editar</button>
+                                <button id="" class="dropdown-item" data-url="">Eliminar</button>
+                      </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<div class="modal fade" id="modal_id" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar orden</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <select class="form-control" id="client_id">
+                    <option hidden value="Seleccione...">Seleccione</option>
+                    @foreach (var item in Model.Clients)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+                <br/>
+                <select class="form-control" id="product_id">
+                    <option hidden value="Seleccione...">Seleccione</option>
+                    @foreach (var item in Model.Products)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" data-url="@Url.Action("AddOrder", "Order")" id="add_order_id" class="btn btn-primary">Agregar orden</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/js/orders/orders.js"></script>
+}
