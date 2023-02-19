@@ -23,7 +23,6 @@ $(document).on("click", "#update_product_id", function () {
 
 
 $(document).on("click", "#add_product", function () {
-    var $option = $(this);
     var name_product_id = $("#name_product_id").val();
     var desc_product_id = $("#desc_product_id").val();
     if (name_product_id == '' | desc_product_id == '') {
@@ -47,7 +46,6 @@ $(document).on("click", "#add_product", function () {
 $(document).on("click", "#update_product", function () {
 
     var $option = $(this);
-    console.log("Here");
     var name_product_id = $("#name_product_id").val();
     var desc_product_id = $("#desc_product_id").val();
 
@@ -66,7 +64,6 @@ $(document).on("click", "#update_product", function () {
 
 $(document).on("click", "#remove_product_id", function () {
     var $option = $(this);
-    console.log($option.attr("data-url"));
     Swal.fire({
         title: 'Esta seguro que desea eliminar?',
         text: "No se podrán revertir los cambios",
@@ -78,7 +75,6 @@ $(document).on("click", "#remove_product_id", function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.post($option.attr("data-url"), function (data) {
-                debugger
                 Swal.fire({
                     title: data.message,
                     text: "Presione ok para cerrar",
