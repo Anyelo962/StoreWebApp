@@ -116,6 +116,10 @@ namespace Store.WebApplication.Controllers
         {
             var result = _context.Client.Find(id);
 
+            var getOrder = _context.Orders.Where(c => c.IdClient == id).ToList();
+
+            _context.Orders.RemoveRange(getOrder);
+
             _context.Client.Remove(result);
 
             _context.SaveChanges();

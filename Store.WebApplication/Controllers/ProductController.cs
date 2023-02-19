@@ -93,12 +93,14 @@ namespace Store.WebApplication.Controllers
             }
         }
 
-        // GET: ProductController/Delete/5
         [HttpPost]
         public ActionResult Delete(int id)
         {
             var getProduct = _context.Product.Find(id);
 
+            var getOrders = _context.Orders.Where(o => o.IdProduct == id).ToList();
+
+            _context.Orders.RemoveRange(getOrders);
             _context.Product.Remove(getProduct);
             _context.SaveChanges();
 

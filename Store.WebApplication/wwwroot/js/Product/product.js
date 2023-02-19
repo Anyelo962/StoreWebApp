@@ -26,17 +26,22 @@ $(document).on("click", "#add_product", function () {
     var $option = $(this);
     var name_product_id = $("#name_product_id").val();
     var desc_product_id = $("#desc_product_id").val();
-    $.post("Create", { name: name_product_id, Description: desc_product_id }, function (data) {
+    if (name_product_id == '' | desc_product_id == '') {
+        Swal.fire("Favor completar todos los campos!", "Presione ok para cerrar", "info");
+    } else {
+        $.post("Create", { name: name_product_id, Description: desc_product_id }, function (data) {
 
-        Swal.fire({
-            title: data.message,
-            text: "Presione ok para cerrar",
-            icon: "success"
-        }).then(function () {
-            window.location.href = data.url;
+            Swal.fire({
+                title: data.message,
+                text: "Presione ok para cerrar",
+                icon: "success"
+            }).then(function () {
+                window.location.href = "Index";
+            });
+
         });
+    }
 
-    });
 });
 
 $(document).on("click", "#update_product", function () {
